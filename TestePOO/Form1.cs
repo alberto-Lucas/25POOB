@@ -63,5 +63,26 @@ namespace TestePOO
                 "CPF: " + classe.CPF + Environment.NewLine +
                 "DtNascimento: " + classe.DtNascimento.ToShortDateString());
         }
+
+        //Criar a instancia de maneira global
+        Usuario usuario = new Usuario();
+        private void btSalvar_Click(object sender, EventArgs e)
+        {
+            //Criar a instancia da classe Usuario
+            //de maneira global
+            //Apos instanciada, atribuir dados
+            usuario.Nome = txtNome.Text;
+            usuario.CPF = txtCPF.Text;
+            usuario.DtNascimento = dtpDtNascimento.Value;
+            usuario.Email = txtEmail.Text;
+            usuario.Senha = txtSenha.Text;
+
+            MessageBox.Show("Usuário salvo com sucesso.");
+        }
+
+        private void btnExibir_Click(object sender, EventArgs e)
+        {
+            usuario.MsgCPFNome();
+        }
     }
 }
