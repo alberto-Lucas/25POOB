@@ -49,5 +49,34 @@ namespace ProjetoCRUDMVC.Services
             //Executar o comando e retornar o resultado
             return command.ExecuteNonQuery();
         }
+
+        //Método publico que executa comando SELECT no banco de dados
+        //Retorna apenas a primeira coluna da primeira linha do banco
+        //Utilizamos o tipo de dados object pois não sabemos o tipo
+        //de dados que será retornado
+        public object ExecuteScalar(SqlCommand command)
+        {
+            command.Connection = GetConnection();
+            return command.ExecuteScalar();
+        }
+
+        //Método pulibo que executa comando SQL 
+        //Retorna todas as linhas e colunas da consult
+        public DataTable GetDataTable(SqlCommand command)
+        {
+            // Criando o objeto DataTable
+            DataTable dataTable = new DataTable();
+
+            // Definindo a conexão do comando SQL
+            command.Connection = GetConnection();
+            // Criando o objeto SqlDataAdapter e vinculando o comando
+            SqlDataAdapter sqlDataAdapter = new SqlDataAdapter(command);
+
+            // Preenchendo o DataTable com os dados do banco
+            sqlDataAdapter.Fill(dataTable);
+
+            // Retornando o DataTable preenchido
+            return dataTable;
+        }
     }
 }
