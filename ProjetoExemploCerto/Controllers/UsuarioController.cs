@@ -54,7 +54,7 @@ namespace ProjetoExemploCerto.Controllers
                 "Nome = @Nome, " +
                 "Email = @Email, " +
                 "Senha = @Senha " +
-                "WHERE UsuarioId = @UsuarioId";
+                "WHERE usuario_id = @UsuarioId";
 
             SqlCommand command = new SqlCommand(query);
             //Definindo os valores dos parametros
@@ -74,7 +74,7 @@ namespace ProjetoExemploCerto.Controllers
             //um registro na tabela de clientes
             string query =
                 "DELETE FROM Usuario " +
-                "WHERE UsuarioId = @UsuarioId";
+                "WHERE usuario_id = @UsuarioId";
             SqlCommand command = new SqlCommand(query);
             //Definindo os valores dos parametros
             command.Parameters.AddWithValue("@UsuarioId", usuarioId);
@@ -91,7 +91,7 @@ namespace ProjetoExemploCerto.Controllers
             string query =
                 "SELECT * " +
                 "FROM Usuario " +
-                "WHERE UsuarioId = @UsuarioId" +
+                "WHERE usuario_id = @UsuarioId" +
                 "ORDER BY nome";
             SqlCommand command = new SqlCommand(query);
             //Definindo os valores dos parametros
@@ -129,14 +129,14 @@ namespace ProjetoExemploCerto.Controllers
             string query = "SELECT * FROM Usuario ";
 
             //Validar se o filtro foi passado no parametro
+            //Se sim iremos adiciona-lo na nossa query
             if (filtro != "")
-                query += "WHERE @filtro ";
+                query += " WHERE " + filtro;
 
-            query += "ORDER BY nome";
+            query += " ORDER BY nome";
 
             SqlCommand command = new SqlCommand(query);
 
-            command.Parameters.AddWithValue("@filtro", filtro);
             //Executando o comando SQL e armazenando o resultado
             //em um objeto do tipo DataTable
             DataTable dataTable = dataBase.GetDataTable(command);
